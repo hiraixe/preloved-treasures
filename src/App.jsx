@@ -17,7 +17,6 @@ import gucci from "./assets/gucci.jpg";
 import mikana from "./assets/mikana.jpg";
 
 function App() {
-  // 🛍️ PRODUCT LIST
   const products = [
     {
       id: 1,
@@ -94,7 +93,13 @@ function App() {
       return;
     }
 
-    alert(`Checkout successful 👜✨ Total: ₱${total}`);
+    const finalTotal = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    alert(`Checkout successful 👜✨\nTotal: ₱${finalTotal}`);
+
     setCart([]);
   };
 

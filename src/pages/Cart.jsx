@@ -5,6 +5,7 @@ function Cart({ cart, removeItem, total, checkout }) {
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [payment, setPayment] = useState("COD");
+  const [paymentNumber, setPaymentNumber] = useState("");
   const [confirmed, setConfirmed] = useState(false);
 
   const handleCheckout = () => {
@@ -15,6 +16,12 @@ function Cart({ cart, removeItem, total, checkout }) {
 
     if (!name || !address || !contact) {
       alert("Please complete your details 🧠");
+      return;
+    }
+
+    // Require number for GCash / PayMaya
+    if ((payment === "GCash" || payment === "PayMaya") && !paymentNumber) {
+      alert("Please enter your payment number 📱");
       return;
     }
 
@@ -46,14 +53,19 @@ function Cart({ cart, removeItem, total, checkout }) {
         >
           <h1 style={{ color: "#3b5b73" }}>Order Confirmed 🎉</h1>
 
-          <p style={{ color: "#5f6f7a" }}><b>Name:</b> {name}</p>
-          <p style={{ color: "#5f6f7a" }}><b>Address:</b> {address}</p>
-          <p style={{ color: "#5f6f7a" }}><b>Contact:</b> {contact}</p>
-          <p style={{ color: "#5f6f7a" }}><b>Payment:</b> {payment}</p>
-          <p style={{ color: "#3b5b73" }}><b>Total:</b> ₱{total}</p>
+          <p><b>Name:</b> {name}</p>
+          <p><b>Address:</b> {address}</p>
+          <p><b>Contact:</b> {contact}</p>
+          <p><b>Payment:</b> {payment}</p>
+
+          {(payment === "GCash" || payment === "PayMaya") && (
+            <p><b>Paid via number:</b> {paymentNumber}</p>
+          )}
+
+          <p><b>Total:</b> ₱{total}</p>
 
           <p style={{ marginTop: "15px", color: "#5f6f7a" }}>
-            Thanks for shopping at Preloved Treasures 👜✨
+            Thanks for shopping 👜✨
           </p>
         </div>
       </div>
@@ -70,7 +82,6 @@ function Cart({ cart, removeItem, total, checkout }) {
     >
       <h1 style={{ color: "#3b5b73" }}>Cart 🛒</h1>
 
-      {/* CART ITEMS */}
       {cart.length === 0 ? (
         <p style={{ color: "#5f6f7a" }}>Your cart is empty 🥲</p>
       ) : (
@@ -86,22 +97,12 @@ function Cart({ cart, removeItem, total, checkout }) {
                 marginBottom: "10px",
               }}
             >
-              <p style={{ color: "#5f6f7a" }}>
+              <p>
                 {item.name} × {item.quantity} = ₱
                 {item.price * item.quantity}
               </p>
 
-              <button
-                onClick={() => removeItem(item.id)}
-                style={{
-                  background: "transparent",
-                  border: "1px solid #cfd9df",
-                  padding: "6px 10px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  color: "#3b5b73",
-                }}
-              >
+              <button onClick={() => removeItem(item.id)}>
                 Remove ❌
               </button>
             </div>
@@ -109,7 +110,7 @@ function Cart({ cart, removeItem, total, checkout }) {
 
           <h3 style={{ color: "#3b5b73" }}>Total: ₱{total}</h3>
 
-          {/* CHECKOUT FORM */}
+          {/* CHECKOUT */}
           <div
             style={{
               marginTop: "30px",
@@ -120,7 +121,7 @@ function Cart({ cart, removeItem, total, checkout }) {
               maxWidth: "500px",
             }}
           >
-            <h2 style={{ color: "#3b5b73" }}>Checkout Details 📦</h2>
+            <h2 style={{ color: "#3b5b73" }}>Checkout 📦</h2>
 
             <input
               placeholder="Full Name"
@@ -143,6 +144,7 @@ function Cart({ cart, removeItem, total, checkout }) {
               style={inputStyle}
             />
 
+            {/* PAYMENT OPTIONS */}
             <select
               value={payment}
               onChange={(e) => setPayment(e.target.value)}
@@ -151,14 +153,24 @@ function Cart({ cart, removeItem, total, checkout }) {
               <option value="COD">Cash on Delivery (COD)</option>
               <option value="GCash">GCash</option>
               <option value="PayMaya">PayMaya</option>
-              <option value="Card">Credit / Debit Card</option>
             </select>
+
+            {/* CONDITIONAL INPUT */}
+            {(payment === "GCash" || payment === "PayMaya") && (
+              <input
+                placeholder="Enter payment number"
+                value={paymentNumber}
+                onChange={(e) => setPaymentNumber(e.target.value)}
+                style={inputStyle}
+              />
+            )}
 
             <button
               onClick={handleCheckout}
               style={{
                 marginTop: "10px",
-                padding: "10px 15px",
+                padding: "10px",
+                width: "100%",
                 background: "#3b5b73",
                 color: "white",
                 border: "none",
@@ -181,8 +193,6 @@ const inputStyle = {
   padding: "10px",
   borderRadius: "8px",
   border: "1px solid #cfd9df",
-  outline: "none",
-  color: "#3b5b73",
 };
 
 export default Cart;

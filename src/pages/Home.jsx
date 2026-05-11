@@ -96,7 +96,7 @@ function Home() {
               fontSize: "16px",
             }}
           >
-            Preloved Treasures is a curated collection of second-hand bags
+            Angelica's Preloved Treasures is a curated collection of second-hand bags
             chosen for their quality, character, and timeless appeal.  
             We believe in giving fashion a second life — reducing waste
             while keeping style alive. Every piece tells a story,

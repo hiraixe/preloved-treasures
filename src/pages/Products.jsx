@@ -40,7 +40,7 @@ function Products({ products, addToCart }) {
               (e.currentTarget.style.transform = "translateY(0)")
             }
           >
-            {/* IMAGE (opens modal) */}
+            {/* IMAGE */}
             <img
               src={p.image}
               alt={p.name}
@@ -55,10 +55,12 @@ function Products({ products, addToCart }) {
               }}
             />
 
+            {/* NAME */}
             <h3 style={{ color: "#3b5b73", fontSize: "16px" }}>
               {p.name}
             </h3>
 
+            {/* PRICE */}
             <p style={{ color: "#5f6f7a" }}>₱{p.price}</p>
           </div>
         ))}
@@ -129,16 +131,6 @@ function Products({ products, addToCart }) {
             {/* PRICE */}
             <p style={{ color: "#3b5b73", fontWeight: "bold" }}>
               ₱{selectedProduct.price}
-            </p>
-
-            {/* QUALITY */}
-            <p style={{ color: "#5f6f7a", fontSize: "14px" }}>
-              <b>Condition:</b> {selectedProduct.quality}
-            </p>
-
-            {/* DESCRIPTION */}
-            <p style={{ color: "#5f6f7a", fontSize: "14px" }}>
-              {selectedProduct.description}
             </p>
 
             {/* ADD TO CART */}
