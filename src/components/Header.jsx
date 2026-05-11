@@ -31,7 +31,7 @@ function Header({ cartCount }) {
     >
       {/* LOGO */}
       <h2 style={{ margin: 0, color: "#3b5b73" }}>
-        Angelica's Preloved Shop 👜
+        Angelica's Preloved Treasures 👜
       </h2>
 
       {/* NAV */}
