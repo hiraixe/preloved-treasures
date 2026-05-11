@@ -40,13 +40,15 @@ function Products({ products, addToCart }) {
               (e.currentTarget.style.transform = "translateY(0)")
             }
           >
-            {/* CLICK IMAGE → OPEN MODAL */}
+            {/* IMAGE (opens modal) */}
             <img
               src={p.image}
               alt={p.name}
               onClick={() => setSelectedProduct(p)}
               style={{
                 width: "100%",
+                height: "220px",
+                objectFit: "cover",
                 borderRadius: "10px",
                 marginBottom: "10px",
                 cursor: "pointer",
@@ -62,7 +64,7 @@ function Products({ products, addToCart }) {
         ))}
       </div>
 
-      {/* POPUP MODAL */}
+      {/* MODAL */}
       {selectedProduct && (
         <div
           onClick={() => setSelectedProduct(null)}
@@ -76,6 +78,7 @@ function Products({ products, addToCart }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            zIndex: 1000,
           }}
         >
           <div
@@ -84,12 +87,12 @@ function Products({ products, addToCart }) {
               background: "#fff",
               padding: "20px",
               borderRadius: "12px",
-              width: "350px",
+              width: "360px",
               position: "relative",
               boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
             }}
           >
-            {/* CLOSE BUTTON */}
+            {/* CLOSE */}
             <button
               onClick={() => setSelectedProduct(null)}
               style={{
@@ -111,22 +114,31 @@ function Products({ products, addToCart }) {
               alt={selectedProduct.name}
               style={{
                 width: "100%",
+                height: "240px",
+                objectFit: "cover",
                 borderRadius: "10px",
                 marginBottom: "10px",
               }}
             />
 
-            {/* DETAILS */}
+            {/* NAME */}
             <h2 style={{ color: "#3b5b73" }}>
               {selectedProduct.name}
             </h2>
 
+            {/* PRICE */}
             <p style={{ color: "#3b5b73", fontWeight: "bold" }}>
               ₱{selectedProduct.price}
             </p>
 
+            {/* QUALITY */}
             <p style={{ color: "#5f6f7a", fontSize: "14px" }}>
-              Quality: Grade A preloved condition. Slight signs of use but well-maintained.
+              <b>Condition:</b> {selectedProduct.quality}
+            </p>
+
+            {/* DESCRIPTION */}
+            <p style={{ color: "#5f6f7a", fontSize: "14px" }}>
+              {selectedProduct.description}
             </p>
 
             {/* ADD TO CART */}

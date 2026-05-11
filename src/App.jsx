@@ -8,76 +8,93 @@ import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import ProductDetail from "./pages/ProductDetail";
 
+// 👜 IMAGES
+import bally from "./assets/bally.jpg";
+import cln from "./assets/cln.jpg";
+import coach from "./assets/coach.jpg";
+import dior from "./assets/dior.jpg";
+import gucci from "./assets/gucci.jpg";
+import mikana from "./assets/mikana.jpg";
 
 function App() {
+  // 🛍️ PRODUCT LIST
   const products = [
-  {
-    id: 1,
-    name: "CLN Wallet",
-    price: 169.00,
-    image: "https://via.placeholder.com/200"
-  },
-  {
-    id: 2,
-    name: "Mikana Wallet Bag",
-    price: 349.00,
-    image: "https://via.placeholder.com/200"
-  },
-  {
-    id: 3,
-    name: "Beige Minimal Shoulder Bag",
-    price: 999,
-    image: "https://via.placeholder.com/200"
-  },
-  {
-    id: 4,
-    name: "Elegant White Handbag",
-    price: 1800,
-    image: "https://via.placeholder.com/200"
-  },
-  {
-    id: 5,
-    name: "Soft Pastel Crossbody Bag",
-    price: 1350,
-    image: "https://via.placeholder.com/200"
-  },
-  {
-    id: 6,
-    name: "Luxury Dark Brown Vintage Bag",
-    price: 2200,
-    image: "https://via.placeholder.com/200"
-  }
-];
+    {
+      id: 1,
+      name: "CLN Wallet",
+      price: 169.0,
+      image: cln,
+    },
+    {
+      id: 2,
+      name: "Mikana Wallet Bag",
+      price: 349.0,
+      image: mikana,
+    },
+    {
+      id: 3,
+      name: "Coach Sling Bag",
+      price: 479.0,
+      image: coach,
+    },
+    {
+      id: 4,
+      name: "Mini Dior Bag",
+      price: 349.0,
+      image: dior,
+    },
+    {
+      id: 5,
+      name: "Gucci Sling Bag",
+      price: 449.0,
+      image: gucci,
+    },
+    {
+      id: 6,
+      name: "Bally Handbag",
+      price: 249.0,
+      image: bally,
+    },
+  ];
 
   const [cart, setCart] = useState([]);
 
+  // ➕ ADD TO CART
   const addToCart = (product) => {
-    const existing = cart.find((i) => i.id === product.id);
+    setCart((prev) => {
+      const existing = prev.find((i) => i.id === product.id);
 
-    if (existing) {
-      setCart(
-        cart.map((i) =>
+      if (existing) {
+        return prev.map((i) =>
           i.id === product.id
             ? { ...i, quantity: i.quantity + 1 }
             : i
-        )
-      );
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
+        );
+      }
+
+      return [...prev, { ...product, quantity: 1 }];
+    });
   };
 
+  // ❌ REMOVE ITEM
   const removeItem = (id) => {
-    setCart(cart.filter((i) => i.id !== id));
+    setCart((prev) => prev.filter((i) => i.id !== id));
   };
 
+  // 💰 TOTAL
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
+  // 🧺 CHECKOUT
   const checkout = () => {
-    alert("Checkout successful 👜✨");
+    if (cart.length === 0) {
+      alert("Your cart is empty 👜");
+      return;
+    }
+
+    alert(`Checkout successful 👜✨ Total: ₱${total}`);
     setCart([]);
   };
 
@@ -90,13 +107,23 @@ function App() {
 
         <Route
           path="/products"
-          element={<Products products={products} addToCart={addToCart} />}
+          element={
+            <Products
+              products={products}
+              addToCart={addToCart}
+            />
+          }
         />
 
         <Route
-  path="/product/:id"
-  element={<ProductDetail products={products} addToCart={addToCart} />}
-/>
+          path="/product/:id"
+          element={
+            <ProductDetail
+              products={products}
+              addToCart={addToCart}
+            />
+          }
+        />
 
         <Route
           path="/cart"
