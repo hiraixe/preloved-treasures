@@ -17,10 +17,11 @@ function Contact() {
       style={{
         padding: "40px 20px",
         minHeight: "80vh",
-        background: "linear-gradient(180deg, #e2ebf0, #f7f9fb)",
+        background: "#f7f9fb", // ✅ removed gradient to prevent any “pink bleed” conflicts
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        boxSizing: "border-box",
       }}
     >
       <div
@@ -32,8 +33,6 @@ function Contact() {
           boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
           width: "100%",
           maxWidth: "600px",
-
-          // 📱 MOBILE FIX
           boxSizing: "border-box",
         }}
       >
@@ -86,6 +85,7 @@ function Contact() {
               resize: "none",
               fontFamily: "inherit",
               outline: "none",
+              boxSizing: "border-box",
             }}
           />
 

@@ -10,7 +10,6 @@ function Cart({ cart, removeItem, checkout }) {
   const [confirmed, setConfirmed] = useState(false);
   const [finalTotal, setFinalTotal] = useState(0);
 
-  // 💰 ALWAYS use ONE source of truth
   const currentTotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -32,11 +31,9 @@ function Cart({ cart, removeItem, checkout }) {
       return;
     }
 
-    // 🔒 LOCK TOTAL BEFORE ANY CLEARING
     setFinalTotal(currentTotal);
     setConfirmed(true);
 
-    // send cart snapshot upward (App.jsx)
     checkout({
       cart,
       total: currentTotal,
@@ -46,28 +43,9 @@ function Cart({ cart, removeItem, checkout }) {
 
   if (confirmed) {
     return (
-      <div
-        style={{
-          padding: "40px 20px",
-          minHeight: "80vh",
-          background: "linear-gradient(180deg, #e2ebf0, #f7f9fb)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            background: "#ffffff",
-            padding: "30px",
-            borderRadius: "16px",
-            border: "1px solid #cfd9df",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-            maxWidth: "500px",
-            width: "100%",
-          }}
-        >
-          <h1 style={{ color: "#3b5b73" }}>Order Confirmed 🎉</h1>
+      <div style={styles.page}>
+        <div style={styles.card}>
+          <h1 style={styles.title}>Order Confirmed 🎉</h1>
 
           <p><b>Name:</b> {name}</p>
           <p><b>Address:</b> {address}</p>
@@ -78,91 +56,55 @@ function Cart({ cart, removeItem, checkout }) {
             <p><b>Payment Number:</b> {paymentNumber}</p>
           )}
 
-          <hr style={{ margin: "10px 0" }} />
+          <hr style={{ margin: "12px 0" }} />
 
-          <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-            Total: ₱{finalTotal}
-          </p>
+          <p style={styles.total}>Total: ₱{finalTotal}</p>
 
-          <p style={{ marginTop: "15px", color: "#5f6f7a" }}>
-            Thanks for shopping 👜✨
-          </p>
+          <p style={styles.thanks}>Thanks for shopping 👜✨</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        padding: "40px 20px",
-        minHeight: "80vh",
-        background: "linear-gradient(180deg, #e2ebf0, #f7f9fb)",
-      }}
-    >
-      <h1 style={{ color: "#3b5b73" }}>Cart 🛒</h1>
+    <div style={styles.page}>
+      <h1 style={styles.title}>Cart 🛒</h1>
 
       {cart.length === 0 ? (
-        <p style={{ color: "#5f6f7a" }}>Your cart is empty 🥲</p>
+        <p style={styles.text}>Your cart is empty 🥲</p>
       ) : (
         <>
           {/* ITEMS */}
           {cart.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                background: "#ffffff",
-                border: "1px solid #cfd9df",
-                padding: "12px",
-                borderRadius: "10px",
-                marginBottom: "10px",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <p>
+            <div key={item.id} style={styles.item}>
+              <p style={{ margin: 0 }}>
                 {item.name} × {item.quantity} = ₱
                 {item.price * item.quantity}
               </p>
 
               <button
                 onClick={() => removeItem(item.id)}
-                style={{
-                  background: "#ff6b6b",
-                  color: "white",
-                  border: "none",
-                  padding: "6px 10px",
-                  borderRadius: "6px",
-                }}
+                style={styles.removeBtn}
               >
                 Remove
               </button>
             </div>
           ))}
 
-          <h3 style={{ color: "#3b5b73" }}>
+          <h3 style={styles.total}>
             Total: ₱{currentTotal}
           </h3>
 
           {/* CHECKOUT FORM */}
-          <div
-            style={{
-              marginTop: "30px",
-              background: "#ffffff",
-              border: "1px solid #cfd9df",
-              borderRadius: "12px",
-              padding: "20px",
-              maxWidth: "500px",
-            }}
-          >
-            <h2 style={{ color: "#3b5b73" }}>Checkout 📦</h2>
+          <div style={styles.form}>
+            <h2 style={styles.subtitle}>Checkout 📦</h2>
 
-            <input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
-            <input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={inputStyle} />
-            <input placeholder="Contact Number" value={contact} onChange={(e) => setContact(e.target.value)} style={inputStyle} />
+            <input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} style={styles.input} />
+            <input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={styles.input} />
+            <input placeholder="Contact Number" value={contact} onChange={(e) => setContact(e.target.value)} style={styles.input} />
 
-            <select value={payment} onChange={(e) => setPayment(e.target.value)} style={inputStyle}>
-              <option value="COD">Cash on Delivery (COD)</option>
+            <select value={payment} onChange={(e) => setPayment(e.target.value)} style={styles.input}>
+              <option value="COD">Cash on Delivery</option>
               <option value="GCash">GCash</option>
               <option value="PayMaya">PayMaya</option>
             </select>
@@ -172,21 +114,11 @@ function Cart({ cart, removeItem, checkout }) {
                 placeholder="Payment Number"
                 value={paymentNumber}
                 onChange={(e) => setPaymentNumber(e.target.value)}
-                style={inputStyle}
+                style={styles.input}
               />
             )}
 
-            <button
-              onClick={handleCheckout}
-              style={{
-                marginTop: "10px",
-                width: "100%",
-                padding: "10px",
-                background: "#3b5b73",
-                color: "white",
-                borderRadius: "8px",
-              }}
-            >
+            <button onClick={handleCheckout} style={styles.checkoutBtn}>
               Confirm Checkout 💳
             </button>
           </div>
@@ -196,12 +128,87 @@ function Cart({ cart, removeItem, checkout }) {
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  margin: "8px 0",
-  padding: "10px",
-  borderRadius: "8px",
-  border: "1px solid #cfd9df",
+/* 🧼 CLEAN STYLES (this removes weird pink / default browser styles) */
+const styles = {
+  page: {
+    padding: "40px 20px",
+    minHeight: "100vh",
+    background: "linear-gradient(180deg, #e2ebf0, #f7f9fb)",
+    fontFamily: "Arial, sans-serif",
+  },
+
+  card: {
+    background: "#fff",
+    padding: "25px",
+    borderRadius: "14px",
+    border: "1px solid #cfd9df",
+    maxWidth: "500px",
+    margin: "auto",
+  },
+
+  item: {
+    background: "#fff",
+    border: "1px solid #cfd9df",
+    padding: "12px",
+    borderRadius: "10px",
+    marginBottom: "10px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  input: {
+    width: "100%",
+    margin: "8px 0",
+    padding: "10px",
+    borderRadius: "8px",
+    border: "1px solid #cfd9df",
+    outline: "none",
+  },
+
+  removeBtn: {
+    background: "#ff6b6b",
+    color: "white",
+    border: "none",
+    padding: "6px 10px",
+    borderRadius: "6px",
+    cursor: "pointer",
+  },
+
+  checkoutBtn: {
+    marginTop: "10px",
+    width: "100%",
+    padding: "10px",
+    background: "#3b5b73",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+  },
+
+  title: {
+    color: "#3b5b73",
+    marginBottom: "15px",
+  },
+
+  subtitle: {
+    color: "#3b5b73",
+  },
+
+  text: {
+    color: "#5f6f7a",
+  },
+
+  total: {
+    color: "#3b5b73",
+    marginTop: "10px",
+    fontWeight: "bold",
+  },
+
+  thanks: {
+    marginTop: "10px",
+    color: "#5f6f7a",
+  },
 };
 
 export default Cart;
