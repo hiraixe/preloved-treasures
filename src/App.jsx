@@ -3,10 +3,11 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Product from "./pages/Product";
+import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import ProductDetail from "./pages/ProductDetail";
+
 
 function App() {
   const products = [
@@ -48,7 +49,6 @@ function App() {
 
   return (
     <div>
-      {/* HEADER WITH CART COUNT */}
       <Header cartCount={cart.length} />
 
       <Routes>
@@ -60,9 +60,9 @@ function App() {
         />
 
         <Route
-          path="/product/:id"
-          element={<ProductDetail products={products} addToCart={addToCart} />}
-        />
+  path="/product/:id"
+  element={<ProductDetail products={products} addToCart={addToCart} />}
+/>
 
         <Route
           path="/cart"
