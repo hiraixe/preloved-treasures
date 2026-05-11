@@ -1,34 +1,30 @@
 import { useState } from "react";
-import ProductCard from "./ProductCard";
-import Home from "./Home";
+import { Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Contact from "./pages/Contact";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   const products = [
-    {
-      id: 1,
-      name: "Vintage Brown Bag",
-      price: 1200,
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 2,
-      name: "Classic Black Tote",
-      price: 1500,
-      image: "https://via.placeholder.com/200"
-    }
+    { id: 1, name: "Vintage Brown Bag", price: 1200, image: "https://via.placeholder.com/200" },
+    { id: 2, name: "Classic Black Tote", price: 1500, image: "https://via.placeholder.com/200" }
   ];
 
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    const existing = cart.find((item) => item.id === product.id);
+    const existing = cart.find((i) => i.id === product.id);
 
     if (existing) {
       setCart(
-        cart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+        cart.map((i) =>
+          i.id === product.id
+            ? { ...i, quantity: i.quantity + 1 }
+            : i
         )
       );
     } else {
@@ -37,7 +33,7 @@ function App() {
   };
 
   const removeItem = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+    setCart(cart.filter((i) => i.id !== id));
   };
 
   const total = cart.reduce(
@@ -51,50 +47,37 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      {/* 🧭 HOME ADDED PROPERLY */}
-      <Home />
+    <div>
+      {/* HEADER WITH CART COUNT */}
+      <Header cartCount={cart.length} />
 
-      <h1>Preloved Shop 👜</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      {/* PRODUCTS */}
-      <div style={{ display: "flex", gap: "16px" }}>
-        {products.map((p) => (
-          <ProductCard
-            key={p.id}
-            product={p}
-            onAddToCart={addToCart}
-          />
-        ))}
-      </div>
+        <Route
+          path="/products"
+          element={<Products products={products} addToCart={addToCart} />}
+        />
 
-      {/* CART */}
-      <h2 style={{ marginTop: "30px" }}>Cart 🛒</h2>
+        <Route
+          path="/product/:id"
+          element={<ProductDetail products={products} addToCart={addToCart} />}
+        />
 
-      {cart.length === 0 ? (
-        <p>No items yet</p>
-      ) : (
-        <>
-          {cart.map((item) => (
-            <div key={item.id} style={{ marginBottom: "10px" }}>
-              <p>
-                {item.name} × {item.quantity} = ₱
-                {item.price * item.quantity}
-              </p>
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cart={cart}
+              removeItem={removeItem}
+              total={total}
+              checkout={checkout}
+            />
+          }
+        />
 
-              <button onClick={() => removeItem(item.id)}>
-                Remove ❌
-              </button>
-            </div>
-          ))}
-
-          <h3>Total: ₱{total}</h3>
-
-          <button onClick={checkout}>
-            Checkout 💳
-          </button>
-        </>
-      )}
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
     </div>
   );
 }
