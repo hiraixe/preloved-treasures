@@ -12,68 +12,75 @@ function Header({ cartCount }) {
     padding: "6px 10px",
     borderRadius: "8px",
     whiteSpace: "nowrap",
+    fontSize: "14px",
   });
 
   return (
     <header
       style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "14px 16px",
         background: "linear-gradient(90deg, #cfd9df, #e2ebf0)",
         borderBottom: "1px solid #c7d2da",
         boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
         position: "sticky",
         top: 0,
         zIndex: 1000,
-
-        // 📱 mobile-friendly wrapping
-        flexWrap: "wrap",
-        gap: "10px",
+        padding: "12px 16px",
       }}
     >
-      {/* LOGO */}
-      <h2
-        style={{
-          margin: 0,
-          color: "#3b5b73",
-          fontSize: "18px",
-
-          // makes logo behave better on small screens
-          flex: "1 1 200px",
-        }}
-      >
-        Angelica's Preloved Treasures 👜
-      </h2>
-
-      {/* NAV */}
-      <nav
+      {/* WRAPPER */}
+      <div
         style={{
           display: "flex",
-          gap: "10px",
+          justifyContent: "space-between",
           alignItems: "center",
+
+          // 👇 THIS is the real fix
           flexWrap: "wrap",
-          justifyContent: "flex-end",
-          flex: "1 1 300px",
+          gap: "8px",
         }}
       >
-        <Link to="/" style={linkStyle("/")}>
-          Home
-        </Link>
+        {/* LOGO */}
+        <h2
+          style={{
+            margin: 0,
+            color: "#3b5b73",
+            fontSize: "16px",
 
-        <Link to="/products" style={linkStyle("/products")}>
-          Products
-        </Link>
+            // 👇 forces full width on small screens
+            flex: "1 1 100%",
+            textAlign: "center",
+          }}
+        >
+          Angelica's Preloved Treasures 👜
+        </h2>
 
-        <Link to="/cart" style={linkStyle("/cart")}>
-          Cart 🛒 ({cartCount})
-        </Link>
+        {/* NAV */}
+        <nav
+          style={{
+            display: "flex",
+            gap: "8px",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            width: "100%",
+          }}
+        >
+          <Link to="/" style={linkStyle("/")}>
+            Home
+          </Link>
 
-        <Link to="/contact" style={linkStyle("/contact")}>
-          Contact
-        </Link>
-      </nav>
+          <Link to="/products" style={linkStyle("/products")}>
+            Products
+          </Link>
+
+          <Link to="/cart" style={linkStyle("/cart")}>
+            Cart 🛒 ({cartCount})
+          </Link>
+
+          <Link to="/contact" style={linkStyle("/contact")}>
+            Contact
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }
