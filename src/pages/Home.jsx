@@ -27,7 +27,7 @@ function Home() {
         >
           {/* IMAGE */}
           <img
-            src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6"
+            src="https://i.pinimg.com/1200x/33/fe/fe/33fefe37a970df6ab954fb5a2021ec89.jpg"
             alt="Preloved Bags"
             style={{
               width: "420px",
