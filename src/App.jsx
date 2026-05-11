@@ -11,9 +11,43 @@ import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   const products = [
-    { id: 1, name: "Vintage Brown Bag", price: 1200, image: "https://via.placeholder.com/200" },
-    { id: 2, name: "Classic Black Tote", price: 1500, image: "https://via.placeholder.com/200" }
-  ];
+  {
+    id: 1,
+    name: "CLN Wallet",
+    price: 169.00,
+    image: "https://via.placeholder.com/200"
+  },
+  {
+    id: 2,
+    name: "Mikana Wallet Bag",
+    price: 349.00,
+    image: "https://via.placeholder.com/200"
+  },
+  {
+    id: 3,
+    name: "Beige Minimal Shoulder Bag",
+    price: 999,
+    image: "https://via.placeholder.com/200"
+  },
+  {
+    id: 4,
+    name: "Elegant White Handbag",
+    price: 1800,
+    image: "https://via.placeholder.com/200"
+  },
+  {
+    id: 5,
+    name: "Soft Pastel Crossbody Bag",
+    price: 1350,
+    image: "https://via.placeholder.com/200"
+  },
+  {
+    id: 6,
+    name: "Luxury Dark Brown Vintage Bag",
+    price: 2200,
+    image: "https://via.placeholder.com/200"
+  }
+];
 
   const [cart, setCart] = useState([]);
 

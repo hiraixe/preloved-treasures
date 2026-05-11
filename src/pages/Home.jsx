@@ -28,7 +28,7 @@ function Home() {
           {/* IMAGE */}
           <img
             src="https://i.pinimg.com/1200x/33/fe/fe/33fefe37a970df6ab954fb5a2021ec89.jpg"
-            alt="Preloved Bags"
+            alt="Angelica's Preloved Treasures 👜"
             style={{
               width: "420px",
               height: "520px",
@@ -41,7 +41,7 @@ function Home() {
           {/* TEXT */}
           <div>
             <h1 style={{ fontSize: "42px", color: "#3b5b73" }}>
-              Preloved Treasures 👜
+              Preloved, Perfectly Yours.
             </h1>
 
             <p
