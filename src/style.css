@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
   font-family: "Inter", system-ui, sans-serif;
-  background: #fff5f9;
+  background: #f7f9fb;
   color: #2f1a30;
 }
 
@@ -12,8 +12,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #ffb6d4 0%, transparent 35%),
-    #ffe7f2;
+  background: #f7f9fb;
 }
 
 a {
@@ -27,257 +26,172 @@ textarea {
   font: inherit;
 }
 
+/* PAGE WRAPPER */
 .page-wrap {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 40px;
 }
 
+/* HEADER */
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 24px 0;
+  padding: 18px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
+/* LOGO */
 .brand {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  color: #3b5b73;
 }
 
+/* NAV */
 .site-nav {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .site-nav a {
-  padding: 10px 18px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(10px);
-  transition: transform 0.2s ease, background 0.2s ease;
+  background: #f1f5f9;
+  transition: 0.2s ease;
 }
 
 .site-nav a:hover {
-  transform: translateY(-1px);
-  background: #ffcae0;
+  background: #dbeafe;
 }
 
+/* HERO (neutral, no pink) */
 .hero {
   position: relative;
   min-height: 72vh;
   margin-bottom: 48px;
-  border-radius: 32px;
+  border-radius: 24px;
   overflow: hidden;
-  background-image: linear-gradient(180deg, rgba(255, 182, 212, 0.4), rgba(255, 255, 255, 0.3)),
-    url('https://images.unsplash.com/photo-1520975914140-3c0f6d052e58?auto=format&fit=crop&w=1350&q=80');
+  background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url("https://images.unsplash.com/photo-1520975914140-3c0f6d052e58?auto=format&fit=crop&w=1350&q=80");
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 197, 227, 0.7), transparent 28%),
-    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.4), transparent 20%);
-}
-
+/* HERO TEXT */
 .hero-copy {
   position: relative;
   z-index: 1;
   max-width: 540px;
-  padding: 64px 32px;
-  color: #fff;
-}
-
-.eyebrow {
-  margin: 0 0 16px;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: #ffe4f2;
+  padding: 48px 24px;
+  color: #1f2937;
 }
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 4vw, 4.8rem);
-  line-height: 0.95;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
 }
 
 .subtitle {
-  max-width: 420px;
-  margin: 20px 0 28px;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: #fff8f9;
+  margin: 16px 0 24px;
+  color: #4b5563;
+  line-height: 1.6;
 }
 
 .hero-button {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 28px;
+  padding: 14px 22px;
   border-radius: 999px;
-  background: #ff76b3;
+  background: #3b5b73;
   color: white;
-  font-weight: 700;
-  box-shadow: 0 20px 40px rgba(255, 118, 179, 0.2);
+  font-weight: 600;
 }
 
+/* SECTIONS */
 .products,
 .about,
 .contact {
-  padding: 58px 0;
+  padding: 50px 0;
 }
 
-.section-heading {
-  max-width: 640px;
-  margin-bottom: 28px;
-}
-
+/* HEADINGS */
 .section-heading p {
-  margin: 0 0 10px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a63b6d;
-  font-weight: 700;
+  color: #64748b;
+  font-weight: 600;
 }
 
 .section-heading h2 {
   margin: 0;
-  font-size: clamp(2rem, 2.5vw, 3rem);
-  line-height: 1.05;
+  font-size: 2rem;
 }
 
+/* PRODUCT GRID */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
+/* PRODUCT CARD */
 .product-card {
-  border-radius: 28px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 18px 40px rgba(79, 0, 55, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.product-thumb {
-  height: 210px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #ffd6e8 0%, #f8b1d4 100%);
-}
-
-.product-card h3 {
-  margin: 0;
-  font-size: 1.4rem;
-}
-
-.product-card p {
-  margin: 0;
-  color: #5a3a51;
-  line-height: 1.75;
-}
-
-.product-footer {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.product-footer span {
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-.product-footer button {
-  border: none;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: #ff76b3;
-  color: white;
-  cursor: pointer;
-}
-
-.about p {
-  max-width: 720px;
-  line-height: 1.9;
-  color: #54334e;
-  font-size: 1.05rem;
-}
-
-.contact-card {
-  padding: 40px;
-  border-radius: 32px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), #ffe7f2);
-  box-shadow: 0 18px 40px rgba(79, 0, 55, 0.08);
-  max-width: 660px;
-}
-
-.contact-card h2 {
-  margin-top: 0;
-}
-
-.contact-card p {
-  margin: 0 0 24px;
-  color: #5f3b57;
-}
-
-.contact-card form {
-  display: grid;
-  gap: 16px;
-}
-
-.contact-card input,
-.contact-card textarea {
-  width: 100%;
-  border: 1px solid #f2c5d6;
   border-radius: 18px;
   padding: 16px;
-  background: white;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
 }
 
-.contact-card button {
-  width: fit-content;
-  border: none;
-  background: #ff76b3;
-  color: white;
-  padding: 14px 24px;
-  border-radius: 999px;
-  cursor: pointer;
+.product-card:hover {
+  transform: translateY(-4px);
 }
 
+/* PRODUCT IMAGE */
+.product-thumb {
+  height: 200px;
+  border-radius: 14px;
+  background: #e2e8f0;
+}
+
+/* FOOTER */
 .site-footer {
   text-align: center;
-  color: #7d536f;
-  padding-top: 18px;
+  color: #6b7280;
+  padding: 20px 0;
 }
 
+/* 📱 MOBILE FIX */
 @media (max-width: 720px) {
   .site-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+  }
+
+  .site-nav {
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .hero-copy {
-    padding: 48px 24px;
+    padding: 32px 18px;
   }
 
-  .products,
-  .about,
-  .contact {
-    padding: 42px 0;
+  .hero h1 {
+    font-size: 2rem;
   }
 }
-
-
