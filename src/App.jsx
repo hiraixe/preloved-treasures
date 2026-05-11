@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
-return <Home />;
-
+import Home from "./Home";
 
 function App() {
   const products = [
@@ -21,7 +20,6 @@ function App() {
 
   const [cart, setCart] = useState([]);
 
-  // ➕ Add to cart (with quantity logic)
   const addToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
 
@@ -38,18 +36,15 @@ function App() {
     }
   };
 
-  // ❌ Remove item
   const removeItem = (id) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
-  // 💰 Total price
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  // 🧺 Clear cart (checkout simulation)
   const checkout = () => {
     alert("Checkout successful 👜✨");
     setCart([]);
@@ -57,12 +52,19 @@ function App() {
 
   return (
     <div style={{ padding: "20px" }}>
+      {/* 🧭 HOME ADDED PROPERLY */}
+      <Home />
+
       <h1>Preloved Shop 👜</h1>
 
       {/* PRODUCTS */}
       <div style={{ display: "flex", gap: "16px" }}>
         {products.map((p) => (
-          <ProductCard key={p.id} product={p} onAddToCart={addToCart} />
+          <ProductCard
+            key={p.id}
+            product={p}
+            onAddToCart={addToCart}
+          />
         ))}
       </div>
 
@@ -86,10 +88,8 @@ function App() {
             </div>
           ))}
 
-          {/* TOTAL */}
           <h3>Total: ₱{total}</h3>
 
-          {/* CHECKOUT */}
           <button onClick={checkout}>
             Checkout 💳
           </button>
