@@ -7,6 +7,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import ProductDetail from "./pages/ProductDetail";
+import "./responsive.css";
 
 // 👜 IMAGES
 import bally from "./assets/bally.jpg";

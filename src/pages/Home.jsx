@@ -23,6 +23,11 @@ function Home() {
             alignItems: "center",
             gap: "50px",
             maxWidth: "1000px",
+
+            // 📱 MOBILE FIX
+            flexWrap: "wrap",
+            justifyContent: "center",
+            textAlign: "center",
           }}
         >
           {/* IMAGE */}
@@ -35,12 +40,25 @@ function Home() {
               objectFit: "cover",
               borderRadius: "20px",
               boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+
+              // 📱 MOBILE FIX
+              maxWidth: "100%",
+              height: "auto",
             }}
           />
 
           {/* TEXT */}
-          <div>
-            <h1 style={{ fontSize: "42px", color: "#3b5b73" }}>
+          <div
+            style={{
+              maxWidth: "400px",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "42px",
+                color: "#3b5b73",
+              }}
+            >
               Preloved, Perfectly Yours.
             </h1>
 
@@ -48,13 +66,11 @@ function Home() {
               style={{
                 fontSize: "18px",
                 color: "#5f6f7a",
-                maxWidth: "350px",
                 lineHeight: "1.6",
                 marginBottom: "25px",
               }}
             >
-              Curated second-hand bags with timeless style.
-              Sustainable fashion, made beautiful again ✨
+              Curated second-hand bags with timeless style. Sustainable fashion, made beautiful again ✨
             </p>
 
             <button
@@ -67,6 +83,8 @@ function Home() {
                 borderRadius: "10px",
                 cursor: "pointer",
                 fontSize: "16px",
+                width: "100%",
+                maxWidth: "220px",
               }}
             >
               Enter Shop →
@@ -84,7 +102,12 @@ function Home() {
           justifyContent: "center",
         }}
       >
-        <div style={{ maxWidth: "800px", textAlign: "center" }}>
+        <div
+          style={{
+            maxWidth: "800px",
+            textAlign: "center",
+          }}
+        >
           <h2 style={{ color: "#3b5b73", marginBottom: "15px" }}>
             About Our Shop
           </h2>
@@ -97,10 +120,9 @@ function Home() {
             }}
           >
             Angelica's Preloved Treasures is a curated collection of second-hand bags
-            chosen for their quality, character, and timeless appeal.  
-            We believe in giving fashion a second life — reducing waste
-            while keeping style alive. Every piece tells a story,
-            and now it’s ready for yours ✨
+            chosen for their quality, character, and timeless appeal. We believe in giving
+            fashion a second life — reducing waste while keeping style alive. Every piece
+            tells a story, and now it’s ready for yours ✨
           </p>
         </div>
       </div>

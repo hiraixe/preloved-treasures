@@ -32,6 +32,9 @@ function Contact() {
           boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
           width: "100%",
           maxWidth: "600px",
+
+          // 📱 MOBILE FIX
+          boxSizing: "border-box",
         }}
       >
         {/* TITLE */}
@@ -45,9 +48,7 @@ function Contact() {
 
         {/* CONTACT INFO */}
         <div style={{ marginBottom: "20px" }}>
-          <p style={infoStyle}>
-            📍 Ayala, Magalang, Pampanga
-          </p>
+          <p style={infoStyle}>📍 Ayala, Magalang, Pampanga</p>
 
           <p style={infoStyle}>
             📱{" "}
@@ -77,12 +78,14 @@ function Contact() {
             onChange={(e) => setMessage(e.target.value)}
             style={{
               width: "100%",
-              height: "100px",
+              height: "120px",
               marginTop: "10px",
               padding: "10px",
               borderRadius: "10px",
               border: "1px solid #cfd9df",
               resize: "none",
+              fontFamily: "inherit",
+              outline: "none",
             }}
           />
 
@@ -91,12 +94,13 @@ function Contact() {
             style={{
               marginTop: "10px",
               width: "100%",
-              padding: "10px",
+              padding: "12px",
               background: "#3b5b73",
               color: "white",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "10px",
               cursor: "pointer",
+              fontSize: "15px",
             }}
           >
             Send Message ✨

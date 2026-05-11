@@ -20,7 +20,9 @@ function Products({ products, addToCart }) {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "20px",
+
+          // 📱 MOBILE FIX
+          gap: "14px",
         }}
       >
         {products.map((p) => (
@@ -52,6 +54,9 @@ function Products({ products, addToCart }) {
                 borderRadius: "10px",
                 marginBottom: "10px",
                 cursor: "pointer",
+
+                // 📱 MOBILE FIX
+                maxHeight: "180px",
               }}
             />
 
@@ -81,6 +86,8 @@ function Products({ products, addToCart }) {
             justifyContent: "center",
             alignItems: "center",
             zIndex: 1000,
+            padding: "16px",
+            boxSizing: "border-box",
           }}
         >
           <div
@@ -89,7 +96,13 @@ function Products({ products, addToCart }) {
               background: "#fff",
               padding: "20px",
               borderRadius: "12px",
-              width: "360px",
+
+              // 📱 MOBILE FIX
+              width: "100%",
+              maxWidth: "360px",
+              maxHeight: "90vh",
+              overflowY: "auto",
+
               position: "relative",
               boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
             }}
@@ -120,6 +133,9 @@ function Products({ products, addToCart }) {
                 objectFit: "cover",
                 borderRadius: "10px",
                 marginBottom: "10px",
+
+                // 📱 MOBILE FIX
+                maxHeight: "200px",
               }}
             />
 

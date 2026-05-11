@@ -10,6 +10,12 @@ function Cart({ cart, removeItem, checkout }) {
   const [confirmed, setConfirmed] = useState(false);
   const [finalTotal, setFinalTotal] = useState(0);
 
+  // 💰 ALWAYS use ONE source of truth
+  const currentTotal = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   const handleCheckout = () => {
     if (cart.length === 0) {
       alert("Your cart is empty 🛒");
@@ -26,17 +32,16 @@ function Cart({ cart, removeItem, checkout }) {
       return;
     }
 
-    // ✅ calculate total BEFORE clearing anything
-    const totalAmount = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-
-    setFinalTotal(totalAmount);
+    // 🔒 LOCK TOTAL BEFORE ANY CLEARING
+    setFinalTotal(currentTotal);
     setConfirmed(true);
 
-    // send cart snapshot to App.jsx
-    checkout(cart);
+    // send cart snapshot upward (App.jsx)
+    checkout({
+      cart,
+      total: currentTotal,
+      customer: { name, address, contact, payment, paymentNumber },
+    });
   };
 
   if (confirmed) {
@@ -101,7 +106,7 @@ function Cart({ cart, removeItem, checkout }) {
         <p style={{ color: "#5f6f7a" }}>Your cart is empty 🥲</p>
       ) : (
         <>
-          {/* CART ITEMS */}
+          {/* ITEMS */}
           {cart.map((item) => (
             <div
               key={item.id}
@@ -113,7 +118,6 @@ function Cart({ cart, removeItem, checkout }) {
                 marginBottom: "10px",
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: "center",
               }}
             >
               <p>
@@ -129,7 +133,6 @@ function Cart({ cart, removeItem, checkout }) {
                   border: "none",
                   padding: "6px 10px",
                   borderRadius: "6px",
-                  cursor: "pointer",
                 }}
               >
                 Remove
@@ -138,11 +141,7 @@ function Cart({ cart, removeItem, checkout }) {
           ))}
 
           <h3 style={{ color: "#3b5b73" }}>
-            Total: ₱
-            {cart.reduce(
-              (sum, item) => sum + item.price * item.quantity,
-              0
-            )}
+            Total: ₱{currentTotal}
           </h3>
 
           {/* CHECKOUT FORM */}
@@ -158,32 +157,11 @@ function Cart({ cart, removeItem, checkout }) {
           >
             <h2 style={{ color: "#3b5b73" }}>Checkout 📦</h2>
 
-            <input
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              style={inputStyle}
-            />
+            <input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
+            <input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={inputStyle} />
+            <input placeholder="Contact Number" value={contact} onChange={(e) => setContact(e.target.value)} style={inputStyle} />
 
-            <input
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              style={inputStyle}
-            />
-
-            <input
-              placeholder="Contact Number"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              style={inputStyle}
-            />
-
-            <select
-              value={payment}
-              onChange={(e) => setPayment(e.target.value)}
-              style={inputStyle}
-            >
+            <select value={payment} onChange={(e) => setPayment(e.target.value)} style={inputStyle}>
               <option value="COD">Cash on Delivery (COD)</option>
               <option value="GCash">GCash</option>
               <option value="PayMaya">PayMaya</option>
@@ -202,13 +180,11 @@ function Cart({ cart, removeItem, checkout }) {
               onClick={handleCheckout}
               style={{
                 marginTop: "10px",
-                padding: "10px",
                 width: "100%",
+                padding: "10px",
                 background: "#3b5b73",
                 color: "white",
-                border: "none",
                 borderRadius: "8px",
-                cursor: "pointer",
               }}
             >
               Confirm Checkout 💳

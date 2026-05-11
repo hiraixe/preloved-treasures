@@ -12,6 +12,7 @@ function Header({ cartCount }) {
     padding: "6px 10px",
     borderRadius: "8px",
     transition: "0.2s",
+    whiteSpace: "nowrap",
   });
 
   return (
@@ -20,17 +21,26 @@ function Header({ cartCount }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "18px 30px",
+        padding: "14px 16px",
         background: "linear-gradient(90deg, #cfd9df, #e2ebf0)",
         borderBottom: "1px solid #c7d2da",
         boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
         position: "sticky",
         top: 0,
         zIndex: 1000,
+        flexWrap: "wrap",
+        gap: "10px",
       }}
     >
       {/* LOGO */}
-      <h2 style={{ margin: 0, color: "#3b5b73" }}>
+      <h2
+        style={{
+          margin: 0,
+          color: "#3b5b73",
+          fontSize: "18px",
+          flex: "1 1 200px",
+        }}
+      >
         Angelica's Preloved Treasures 👜
       </h2>
 
@@ -38,8 +48,11 @@ function Header({ cartCount }) {
       <nav
         style={{
           display: "flex",
-          gap: "18px",
+          gap: "10px",
           alignItems: "center",
+          flexWrap: "wrap",
+          justifyContent: "flex-end",
+          flex: "1 1 300px",
         }}
       >
         <Link to="/" style={linkStyle("/")}>
